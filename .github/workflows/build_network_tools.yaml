@@ -19,13 +19,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2.4.0
 
-      - name: Environment standardization
-        run: |
-          default_branch=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
-          echo "default_branch=${default_branch}" >> $GITHUB_ENV
-          default_branch_ref="refs/heads/${default_branch}"
-          echo "default_branch_ref=${default_branch_ref}" >> $GITHUB_ENV
-
       - name: Cache Docker
         uses: satackey/action-docker-layer-caching@v0.0.11
         # Ignore the failure of a step and avoid terminating the job.
@@ -41,12 +34,12 @@ jobs:
         run: npx snyk container test ${{ github.sha }} --file=./Dockerfile
 
       - name: Log in to registry
-        if: github.ref == env.default_branch_ref
+        if: github.ref == 'main'
         # This is where you will update the PAT to GITHUB_TOKEN
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push image
-        if: github.ref == env.default_branch_ref
+        if: github.ref == 'main'
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
 
