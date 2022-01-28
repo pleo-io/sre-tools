@@ -1,0 +1,64 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  IMAGE_NAME: network-tools
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    timeout-minutes: 90
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.4.0
+
+      - name: Environment standardization
+        run: |
+          default_branch=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
+          echo "default_branch=${default_branch}" >> $GITHUB_ENV
+          default_branch_ref="refs/heads/${default_branch}"
+          echo "default_branch_ref=${default_branch_ref}" >> $GITHUB_ENV
+          repo="${{ github.event.repository.name }}"
+          echo "repo=${repo}" >> $GITHUB_ENV
+
+      - name: Cache Docker
+        uses: satackey/action-docker-layer-caching@v0.0.11
+        # Ignore the failure of a step and avoid terminating the job.
+        continue-on-error: true
+
+      - name: Build Docker Image
+        run: docker build -t ${{ github.sha }} . --build-arg github_sha=${{ github.sha }}
+
+      - name:  Snyk auth
+        run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      - name: Snyk test
+        run: npx snyk container test ${{ github.sha }} --file=./ops/network-tools/Dockerfile
+
+      - name: Log in to registry
+        if: github.ref == env.default_branch_ref
+        # This is where you will update the PAT to GITHUB_TOKEN
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        if: github.ref == env.default_branch_ref
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          # Strip git ref prefix from version
+          VERSION=${{ github.sha }}
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag ${{ github.sha }} $IMAGE_ID:$VERSION
+          docker tag ${{ github.sha }} $IMAGE_ID:latest
+          docker push $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:latest
