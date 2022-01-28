@@ -25,8 +25,6 @@ jobs:
           echo "default_branch=${default_branch}" >> $GITHUB_ENV
           default_branch_ref="refs/heads/${default_branch}"
           echo "default_branch_ref=${default_branch_ref}" >> $GITHUB_ENV
-          repo="${{ github.event.repository.name }}"
-          echo "repo=${repo}" >> $GITHUB_ENV
 
       - name: Cache Docker
         uses: satackey/action-docker-layer-caching@v0.0.11
