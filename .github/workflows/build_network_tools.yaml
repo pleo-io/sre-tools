@@ -40,7 +40,7 @@ jobs:
         run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Snyk test
-        run: npx snyk container test ${{ github.sha }} --file=./ops/network-tools/Dockerfile
+        run: npx snyk container test ${{ github.sha }} --file=./Dockerfile
 
       - name: Log in to registry
         if: github.ref == env.default_branch_ref
