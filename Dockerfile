@@ -44,9 +44,11 @@ ADD https://github.com/vi/websocat/releases/download/v1.9.0/websocat_linux64 /
 RUN sha256sum websocat_linux64 | ack 9ab17a9e03cca60fbf00aa709a1df5d9fb99a4514240cf7fac390470d6022bc5
 RUN mv /websocat_linux64 /usr/local/bin/websocat
 
+RUN useradd -ms /bin/bash pleo
+
 USER pleo
+WORKDIR /home/pleo
 
 # Set Datadog version to the Git commit SHA.
 ARG github_sha
 ENV DD_VERSION ${github_sha}
-WORKDIR /tmp
