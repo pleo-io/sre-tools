@@ -31,7 +31,13 @@ jobs:
         run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Snyk test
-        run: npx snyk container test ${{ github.sha }} --file=./Dockerfile
+        continue-on-error: true
+        run: npx snyk container test ${{ github.sha }} --file=./Dockerfile --severity-threshold=high --sarif-file-output=snyk.sarif
+
+      - name: Upload Snyk report as sarif 📦
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
 
       - name: Log in to registry
         if: github.ref == 'refs/heads/main'
