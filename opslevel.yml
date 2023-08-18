@@ -6,7 +6,7 @@ service:
   owner: sre
   language: Shell
   description: |-
-    Docker image to help debug network issues
+    Container image to help debug network issues
   repositories:
     - name: pleo-io/network-tools
       path: "/"
