@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
   netcat-traditional \
   openjdk-8-jre \
   pgcli \
+  ripgrep \
   tzdata \
   unzip \
   vim
@@ -23,11 +24,6 @@ RUN apt-get update && apt-get install -y \
 COPY install-kafka-tools.sh install-kafka-tools.sh
 
 RUN /bin/bash -c ./install-kafka-tools.sh /opt/kafka
-
-ADD https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb /
-RUN sha256sum ripgrep_0.10.0_amd64.deb | ack fae8c9dbe17998ce7d426bd3649fe71fd7c9eef0e9c2ac85e5958e2a70f665b8
-RUN dpkg -i ripgrep_0.10.0_amd64.deb
-RUN rm ripgrep_0.10.0_amd64.deb
 
 ADD https://releases.hashicorp.com/vault/1.3.2/vault_1.3.2_linux_amd64.zip /
 RUN sha256sum vault_1.3.2_linux_amd64.zip | ack 6e72132de0421b74d909f50be1823fe57182694c4268ba9a38c31213d9497ec9
