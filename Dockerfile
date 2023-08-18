@@ -36,16 +36,18 @@ RUN apt-get update && apt-get install -y vault
 RUN /bin/bash -c ./install-kafka-tools.sh /opt/kafka
 
 ENV CURLIE_VERSION=1.7.1
-ENV CURLIE_FILE_NAME=curlie_"$CURLIE_VERSION"_linux_arm64.deb
+ENV CURLIE_FILE_NAME=curlie_"$CURLIE_VERSION"_linux_amd64.deb
 
 ADD https://github.com/rs/curlie/releases/download/v$CURLIE_VERSION/$CURLIE_FILE_NAME /
-RUN sha256sum $CURLIE_FILE_NAME | ack c50b80ae0451097242279e4e20001f775370ed0259e4c41ce59fefb5b05a15c8
+RUN sha256sum $CURLIE_FILE_NAME | ack c749d3749cdd920a6cb77c68c7b4bf807d18acb62c33d4283d2d15d727968509
 RUN dpkg -i $CURLIE_FILE_NAME
 RUN rm $CURLIE_FILE_NAME
 
-ADD https://github.com/vi/websocat/releases/download/v1.9.0/websocat_linux64 /
-RUN sha256sum websocat_linux64 | ack 9ab17a9e03cca60fbf00aa709a1df5d9fb99a4514240cf7fac390470d6022bc5
-RUN mv /websocat_linux64 /usr/local/bin/websocat
+ENV WEBSOCAT_FILE_NAME=websocat.arm-unknown-linux-musleabi
+ADD https://github.com/vi/websocat/releases/download/v1.11.0/$WEBSOCAT_FILE_NAME /
+RUN sha256sum $WEBSOCAT_FILE_NAME
+RUN sha256sum $WEBSOCAT_FILE_NAME
+RUN mv $WEBSOCAT_FILE_NAME /usr/local/bin/websocat
 
 RUN useradd -ms /bin/bash pleo
 
