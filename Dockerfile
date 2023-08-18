@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:23.04
 MAINTAINER Alex Humphreys <alex.humphreys@pleo.io>
 
 ENV LC_ALL=C.UTF-8
