@@ -19,11 +19,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2.4.0
 
-      - name: Cache Docker
-        uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Build Docker Image
         run: docker build -t ${{ github.sha }} . --build-arg github_sha=${{ github.sha }}
 
@@ -33,11 +28,6 @@ jobs:
       - name: Snyk test
         continue-on-error: true
         run: npx snyk container test ${{ github.sha }} --file=./Dockerfile --severity-threshold=high --sarif-file-output=snyk.sarif
-
-      - name: Upload Snyk report as sarif 📦
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: snyk.sarif
 
       - name: Log in to registry
         if: github.ref == 'refs/heads/main'
