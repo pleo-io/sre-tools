@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
   jq \
   mycli \
   mysql-client \
-  netcat \
+  netcat-traditional \
   openjdk-8-jre \
   pgcli \
   tzdata \
