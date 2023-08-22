@@ -1,0 +1,18 @@
+---
+version: 1
+service:
+  name: Network tools
+  lifecycle: alpha
+  owner: sre
+  language: Shell
+  description: |-
+    Container image to help debug network issues
+  repositories:
+    - name: pleo-io/network-tools
+      path: "/"
+      provider: github
+  tags:
+    - key: type
+      value: library
+    - key: open-source
+      value: "true"
