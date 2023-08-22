@@ -22,13 +22,6 @@ jobs:
       - name: Build Docker Image
         run: docker build -t ${{ github.sha }} . --build-arg github_sha=${{ github.sha }}
 
-      - name:  Snyk auth
-        run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
-
-      - name: Snyk test
-        continue-on-error: true
-        run: npx snyk container test ${{ github.sha }} --file=./Dockerfile --severity-threshold=high --sarif-file-output=snyk.sarif
-
       - name: Log in to registry
         if: github.ref == 'refs/heads/main'
         # This is where you will update the PAT to GITHUB_TOKEN
