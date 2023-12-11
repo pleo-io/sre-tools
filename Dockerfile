@@ -1,5 +1,5 @@
 FROM ubuntu:23.04
-MAINTAINER Alex Humphreys <alex.humphreys@pleo.io>
+LABEL maintainer="Alex Humphreys <alex.humphreys@pleo.io>"
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
@@ -51,7 +51,8 @@ RUN mv $WEBSOCAT_FILE_NAME /usr/local/bin/websocat
 ENV AWSCLI_FILE_NAME=awscli-exe-linux-x86_64.zip
 ADD https://awscli.amazonaws.com/$AWSCLI_FILE_NAME /
 RUN sha256sum $AWSCLI_FILE_NAME
-RUN unzip $AWSCLI_FILE_NAME && sudo ./aws/install
+RUN unzip $AWSCLI_FILE_NAME
+RUN bash -x ./aws/install
 
 RUN useradd -ms /bin/bash pleo
 
