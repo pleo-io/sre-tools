@@ -51,8 +51,7 @@ RUN mv $WEBSOCAT_FILE_NAME /usr/local/bin/websocat
 ENV AWSCLI_FILE_NAME=awscli-exe-linux-x86_64.zip
 ADD https://awscli.amazonaws.com/$AWSCLI_FILE_NAME /
 RUN sha256sum $AWSCLI_FILE_NAME
-RUN unzip $AWSCLI_FILE_NAME
-RUN bash -x ./aws/install
+RUN unzip $AWSCLI_FILE_NAME && ./aws/install
 
 RUN useradd -ms /bin/bash pleo
 
