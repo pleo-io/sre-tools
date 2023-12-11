@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
   dnsutils \
   gpg \
   jq \
+  less \
   lsb-release \
   mycli \
   mysql-client \
