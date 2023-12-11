@@ -1,5 +1,6 @@
 FROM ubuntu:22.04
 LABEL maintainer="Alex Humphreys <alex.humphreys@pleo.io>"
+LABEL org.opencontainers.image.source="https://github.com/pleo-io/network-tools"
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
