@@ -1,18 +1,18 @@
-FROM ubuntu:23.04
-MAINTAINER Alex Humphreys <alex.humphreys@pleo.io>
+FROM ubuntu:22.04
+LABEL maintainer="SRE Team <sre@pleo.io>"
+LABEL org.opencontainers.image.source="https://github.com/pleo-io/network-tools"
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
-
-# RUN npm install -g wscat
 RUN apt-get update && apt-get install -y \
   ack \
   curl \
   dnsutils \
   gpg \
   jq \
+  less \
   lsb-release \
   mycli \
   mysql-client \
@@ -46,8 +46,12 @@ RUN rm $CURLIE_FILE_NAME
 ENV WEBSOCAT_FILE_NAME=websocat.arm-unknown-linux-musleabi
 ADD https://github.com/vi/websocat/releases/download/v1.11.0/$WEBSOCAT_FILE_NAME /
 RUN sha256sum $WEBSOCAT_FILE_NAME
-RUN sha256sum $WEBSOCAT_FILE_NAME
 RUN mv $WEBSOCAT_FILE_NAME /usr/local/bin/websocat
+
+ENV AWSCLI_FILE_NAME=awscli-exe-linux-x86_64.zip
+ADD https://awscli.amazonaws.com/$AWSCLI_FILE_NAME /
+RUN sha256sum $AWSCLI_FILE_NAME
+RUN unzip -q $AWSCLI_FILE_NAME && ./aws/install
 
 RUN useradd -ms /bin/bash pleo
 
