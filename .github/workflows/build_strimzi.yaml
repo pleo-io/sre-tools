@@ -1,13 +1,13 @@
 on:
   push:
     paths:
-      - 'network-tools/**'
+      - 'strimzi/**'
     branches:
-      - main
+      - feat/sre-4435-custom-strimzi-image
   pull_request:
 
 env:
-  IMAGE_NAME: network-tools
+  IMAGE_NAME: strimzi
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2.4.0
 
       - name: Build Docker Image
-        run: cd network-tools && docker build -t ${{ github.sha }} . --build-arg github_sha=${{ github.sha }}
+        run: cd strimzi && docker build -t ${{ github.sha }} . --build-arg github_sha=${{ github.sha }}
 
       - name: Log in to registry
         if: github.ref == 'refs/heads/main'

@@ -1,14 +1,14 @@
 ---
 version: 1
 service:
-  name: Network tools
+  name: SRE Tools
   lifecycle: alpha
   owner: sre
   language: Shell
   description: |-
-    Container image to help debug network issues
+    Misc stuff to help with various SRE stuff
   repositories:
-    - name: pleo-io/network-tools
+    - name: pleo-io/sre-tools
       path: "/"
       provider: github
   tags:
