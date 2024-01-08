@@ -1,5 +1,5 @@
 FROM quay.io/strimzi/kafka:0.27.1-kafka-2.8.1
-LABEL maintainer="sre@pleo.io"
+LABEL maintainer="SRE Team <sre@pleo.io>"
 
 USER root:root
 RUN mkdir -p /opt/kafka/plugins/debezium
