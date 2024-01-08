@@ -3,7 +3,7 @@ on:
     paths:
       - 'strimzi-kafka-connect/**'
     branches:
-      - main
+      - feat/sre-4435-custom-strimzi-image
   pull_request:
 
 env:
