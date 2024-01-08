@@ -1,13 +1,13 @@
 on:
   push:
     paths:
-      - 'strimzi/**'
+      - 'strimzi-kafka-connect/**'
     branches:
       - main
   pull_request:
 
 env:
-  IMAGE_NAME: strimzi
+  IMAGE_NAME: strimzi-kafka-connect
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2.4.0
 
       - name: Build Docker Image
-        run: cd strimzi && docker build -t ${{ github.sha }} . --build-arg github_sha=${{ github.sha }}
+        run: cd strimzi-kafka-connect && docker build -t ${{ github.sha }} . --build-arg github_sha=${{ github.sha }}
 
       - name: Log in to registry
         # if: github.ref == 'refs/heads/main'
