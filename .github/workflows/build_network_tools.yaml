@@ -30,7 +30,7 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push image
-        if: github.ref == 'refs/heads/main'
+        if: ${{ github.event.repository.default_branch == github.ref_name }}
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
 

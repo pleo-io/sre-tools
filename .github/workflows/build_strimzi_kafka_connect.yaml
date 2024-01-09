@@ -3,11 +3,12 @@ on:
     paths:
       - 'strimzi-kafka-connect/**'
     branches:
-      - main
+      - feat/sre-4435-custom-strimzi-image
   pull_request:
 
 env:
   IMAGE_NAME: strimzi-kafka-connect
+  STRIMZI_VERSION: 0.27.1-kafka-2.8.1
 
 jobs:
   build:
@@ -30,17 +31,13 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push image
-        # if: github.ref == 'refs/heads/main'
+        if: ${{ github.event.repository.default_branch == github.ref_name }}
         run: |
+          # Set variables
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
-
-          # Change all uppercase to lowercase
+          SHA_SHORT=$(git rev-parse --short HEAD)
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          
           # Strip git ref prefix from version
-          VERSION=${{ github.sha }}
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-          docker tag ${{ github.sha }} $IMAGE_ID:$VERSION
-          docker tag ${{ github.sha }} $IMAGE_ID:latest
-          docker push $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:latest
+          docker tag ${{ github.sha }} ${STRIMZI_VERSION}-${SHA_SHORT}
+          docker push $IMAGE_ID:${STRIMZI_VERSION}-${SHA_SHORT}
