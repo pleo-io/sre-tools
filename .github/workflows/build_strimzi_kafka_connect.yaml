@@ -26,12 +26,12 @@ jobs:
         run: cd strimzi-kafka-connect && docker build -t ${{ github.sha }} . --build-arg github_sha=${{ github.sha }}
 
       - name: Log in to registry
-        # if: ${{ github.event.repository.default_branch == github.ref_name }}
+        if: ${{ github.event.repository.default_branch == github.ref_name }}
         # This is where you will update the PAT to GITHUB_TOKEN
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push image
-        # if: ${{ github.event.repository.default_branch == github.ref_name }}
+        if: ${{ github.event.repository.default_branch == github.ref_name }}
         run: |
           # Set variables
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
