@@ -39,5 +39,5 @@ jobs:
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           
           # Strip git ref prefix from version
-          docker tag ${{ github.sha }} ${STRIMZI_VERSION}-${SHA_SHORT}
+          docker tag ${{ github.sha }} $IMAGE_ID:${STRIMZI_VERSION}-${SHA_SHORT}
           docker push $IMAGE_ID:${STRIMZI_VERSION}-${SHA_SHORT}
