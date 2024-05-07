@@ -1,4 +1,4 @@
-FROM quay.io/strimzi/kafka:0.40.0-kafka-3.6.0
+FROM quay.io/strimzi/kafka:0.39.0-kafka-3.5.1
 LABEL maintainer="SRE Team <sre@pleo.io>"
 
 USER root:root
