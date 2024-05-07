@@ -8,7 +8,7 @@ on:
 
 env:
   IMAGE_NAME: strimzi-kafka-connect
-  STRIMZI_VERSION: 0.39.0-kafka-3.5.1
+  STRIMZI_VERSION: 0.40.0-kafka-3.6.0
 
 jobs:
   build:
