@@ -27,6 +27,8 @@ Configurations for `multi-gitter`
 4. Run this against all remaining services in `product-dev`
 5. Merge all PRs and observe for a day
 6. Proceed with `product-staging` generating PRs for all services
-7. Merge all PRs for `product-staging` and observe for ~2 days
+7. Merge PRs for `product-staging` and observe for ~2 days
+    - don't merge all PRs at once, we merge slowly and observe
 8. Proceed with `product-production` generating PRs for all services
-7. Merge all PRs for `product-production` and pray 🙏
+7. Merge PRs for `product-production` and pray 🙏
+    - don't merge all PRs at once, we merge slowly and observe
