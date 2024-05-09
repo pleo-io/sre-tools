@@ -21,7 +21,7 @@ branch: feat/sre-5197-product-production
 #code-search:
 
 # The commit message. Will default to title + body if none is set.
-commit-message: "fix(k8s): use k8s service instead of full URLs in product-dev"
+commit-message: "fix(k8s): use k8s service instead of full URLs in product-production"
 
 # The maximum number of concurrent runs.
 concurrent: 1
@@ -102,7 +102,7 @@ pr-body: |
   You can read more on the linear issue [here](https://linear.app/pleo/issue/SRE-5197/move-from-ingress-to-k8s-service-for-internal-traffic).
 
 # The title of the PR. Will default to the first line of the commit message if none is set.
-pr-title: "feat(k8s): [SRE Automated PR] upgrade Datadog monitors"
+pr-title: "feat(k8s): [SRE Automated PR] switch to k8s service in product-production"
 
 # The name, including owner of a GitHub repository in the format "ownerName/repoName".
 # we want to use `nanake` for testing
