@@ -19,14 +19,14 @@ Configurations for `multi-gitter`
 ## How do we use this?
 
 1. First we get a list of all services running in `product-dev` looking at the list of apps registered in `flux-config`
-2. We run this with `multi-gitter` targeting only the service `ananke` using the `product-dev.yaml` config
+2. Run this with `multi-gitter` targeting only the service `ananke` using the `product-dev.yaml` config
     - comment out the org
     - comment out the list of repos to only operate on `ananke` for testing purposes
     - run `multi-gitter run product-dev.bash --config=product-dev.yaml`
-3. We validate that works by merging the PR generated at step 2
-4. We run this against all remaining services in `product-dev`
-5. We merge all PRs and observe for a day
-6. We proceed with `product-staging` generating PRs for all services
-7. We merge all PRs for `product-staging` and we observe for ~2 days
-8. We proceed with `product-production` generating PRs for all services
-7. We merge all PRs for `product-production` and we pray 🙏
+3. Validate that works by merging the PR generated at step 2
+4. Run this against all remaining services in `product-dev`
+5. Merge all PRs and observe for a day
+6. Proceed with `product-staging` generating PRs for all services
+7. Merge all PRs for `product-staging` and observe for ~2 days
+8. Proceed with `product-production` generating PRs for all services
+7. Merge all PRs for `product-production` and pray 🙏

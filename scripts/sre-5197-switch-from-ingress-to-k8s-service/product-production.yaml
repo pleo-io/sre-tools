@@ -95,7 +95,7 @@ pr-body: |
   
   ## 🤖🤖🤖 This is an automated pull request to switch from using full URLs to k8s services for internal traffic 🤖🤖🤖
   
-  In this PR we operato only on `product-production` and we do the following changes:
+  In this PR we operate only on `product-production` and we do the following changes:
   - change all URLs pointing to internal services to use k8s services instead of full URLs 📍
   - if any of the previous URLs were pointing to a PCI service, we also change `securityLevel` to `pci-connected` 🐱‍💻
   
