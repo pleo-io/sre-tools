@@ -3,7 +3,7 @@ version: 1
 service:
   name: SRE Tools
   lifecycle: alpha
-  owner: sre
+  owner: site-reliability-engineering
   language: Shell
   description: |-
     Misc stuff to help with various SRE stuff
