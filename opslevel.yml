@@ -1,9 +1,9 @@
 ---
 version: 1
 service:
-  name: SRE Tools
+  name: sre tools
   lifecycle: alpha
-  owner: site-reliability-engineering
+  owner: team-site-reliability-engineering
   language: Shell
   description: |-
     Misc stuff to help with various SRE stuff
