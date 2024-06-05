@@ -1,7 +1,7 @@
 ---
 version: 1
 service:
-  name: sre tools
+  name: SRE Tools
   lifecycle: alpha
   owner: team-site-reliability-engineering
   language: Shell
