@@ -1,0 +1,128 @@
+# The username of the assignees to be added on the pull request.
+assignees:
+  - ninjatux
+
+# Email of the committer. If not set, the global git config setting will be used.
+author-email: sre+campaign-bot@pleo.io
+
+# Name of the committer. If not set, the global git config setting will be used.
+author-name: sre-bot
+
+# The branch which the changes will be based on.
+base-branch:
+
+# Base URL of the target platform, needs to be changed for GitHub enterprise, a self-hosted GitLab instance, Gitea or BitBucket.
+base-url:
+
+# The name of the branch where changes are committed.
+branch: feat/sre-5197-product-dev
+
+# Use a code search to find a set of repositories to target (GitHub only). Repeated results from a given repository will be ignored, forks are NOT included by default (use `fork:true` to include them). See the GitHub documentation for full syntax: https://docs.github.com/en/search-github/searching-on-github/searching-code.
+#code-search:
+
+# The commit message. Will default to title + body if none is set.
+commit-message: "fix(k8s): use k8s service instead of full URLs in product-dev"
+
+# The maximum number of concurrent runs.
+concurrent: 1
+
+# What should happen if the branch already exist.
+# Available values:
+#   skip: Skip making any changes to the existing branch and do not create a new pull request.
+#   replace: Replace the existing content of the branch by force pushing any new changes, then reuse any existing pull request, or create a new one if none exist.
+conflict-strategy: replace
+
+# Create pull request(s) as draft.
+draft: false
+
+# Run without pushing changes or creating pull requests.
+dry-run: true
+
+# Limit fetching to the specified number of commits. Set to 0 for no limit.
+fetch-depth: 1
+
+# Fork the repository instead of creating a new branch on the same owner.
+#fork: false
+
+# If set, make the fork to the defined value. Default behavior is for the fork to be on the logged in user.
+#fork-owner:
+
+# The type of git implementation to use.
+# Available values:
+#   go: Uses go-git, a Go native implementation of git. This is compiled with the multi-gitter binary, and no extra dependencies are needed.
+#   cmd: Calls out to the git command. This requires git to be installed and available with by calling "git".
+#git-type: go
+
+# Take manual decision before committing any change. Requires git to be installed.
+interactive: false
+
+# Labels to be added to any created pull request.
+labels:
+  - internal
+  - automerge
+
+# The file where all logs should be printed to. "-" means stdout.
+log-file: "-"
+
+# The formatting of the logs. Available values: text, json, json-pretty.
+log-format: text
+
+# The level of logging that should be made. Available values: trace, debug, info, error.
+log-level: info
+
+# If this value is set, reviewers will be randomized.
+max-reviewers: 0
+
+# If this value is set, team reviewers will be randomized
+max-team-reviewers: 0
+
+# The name of a GitHub organization. All repositories in that organization will be used.
+org:
+  - pleo-io
+
+# The file that the output of the script should be outputted to. "-" means stdout.
+output: "-"
+
+# Don't use any terminal formatting when printing the output.
+plain-output: false
+
+# The platform that is used. Available values: github, gitlab, gitea, bitbucket_server.
+platform: github
+
+# The body of the commit message. Will default to everything but the first line of the commit message if none is set.
+pr-body: |
+  [SRE-5197 : Move from ingress to k8s service for internal traffic](https://linear.app/pleo/issue/SRE-5197/move-from-ingress-to-k8s-service-for-internal-traffic)
+  
+  ## 🤖🤖🤖 This is an automated pull request to switch from using full URLs to k8s services for internal traffic 🤖🤖🤖
+  
+  In this PR we operate only on `product-dev` and we do the following changes:
+  - change host name in all URLs pointing to internal services to use k8s services instead of `ingress-nginx-internal` URLs 📍
+  - if any of the previous URLs were pointing to a PCI service, we also change `securityLevel` to `pci-connected` 🐱‍💻
+  
+  You can read more on the linear issue [here](https://linear.app/pleo/issue/SRE-5197/move-from-ingress-to-k8s-service-for-internal-traffic).
+
+# The title of the PR. Will default to the first line of the commit message if none is set.
+pr-title: "feat(k8s): [SRE Automated PR] switch to k8s service in product-dev"
+
+# The name, including owner of a GitHub repository in the format "ownerName/repoName".
+# repo:
+#   - pleo-io/ananke
+
+# Exclude repositories that match with a given Regular Expression
+#repo-exclude:
+
+# Include repositories that match with a given Regular Expression
+#repo-include:
+
+# Use a repository search to find repositories to target (GitHub only). Forks are NOT included by default, use `fork:true` to include them. See the GitHub documentation for full syntax: https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories.
+#repo-search:
+
+# The username of the reviewers to be added on the pull request.
+#reviewers:
+#  - example
+
+# Skip repositories which are forks.
+#skip-forks: false
+
+# Skip pull request and directly push to the branch.
+#skip-pr: false
